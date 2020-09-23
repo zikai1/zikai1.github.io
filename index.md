@@ -7,7 +7,7 @@
       <p><b>E-mail: zhaomingyang16@mails.ucas.ac.cn</b></p>
     </td>
     <td width="25%">
-      <img src="/myzhao.png" width="100%">      % 插入证件照代码
+      <img src="/myzhao.png" width="100%">     
     </td>
   </tr>
 </table>
