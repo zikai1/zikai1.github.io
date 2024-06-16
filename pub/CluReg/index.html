@@ -1,0 +1,264 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Correspondence-Free Non-Rigid Point Set Registration Using Unsupervised Clustering Analysis</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+	<!-- Meta tags for Zotero grab citation -->
+	<meta name="citation_title" content="Correspondence-Free Non-Rigid Point Set Registration Using Unsupervised Clustering Analysis">
+	<meta name="citation_author" content="Mingyang Zhao">
+	<meta name="citation_author" content="Jingen Jiang">
+	<meta name="citation_author" content="Lei Ma">
+	<meta name="citation_author" content="Shiqing Xin">
+	<meta name="citation_author" content="Gaofeng Meng">
+	<meta name="citation_author" content="Dong-Ming Yan">
+	<meta name="citation_publication_date" content="2024">
+	<meta name="citation_conference_title" content="CVPR">
+	<meta name="citation_pdf_url" content="https://arxiv.org/abs/2404.13420">
+
+	<meta name="robots" content="index,follow">
+	<meta name="description"
+		content="This paper presents a novel non-rigid point set registration method that is inspired by unsupervised clustering analysis. 
+		Unlike previous approaches that treat the source and target point sets as separate entities, we develop a holistic framework where they are formulated as clustering centroids and clustering members, separately. 
+		We then adopt Tikhonov regularization with an ℓ1-induced Laplacian kernel instead of the commonly used Gaussian kernel to ensure smooth and more robust displacement fields. Our formulation delivers closed-form solutions, theoretical guarantees, independence from dimensions, and the ability to handle large deformations. 
+		Subsequently, we introduce a clustering-improved Nystr ̈ om method to effectively reduce the computational complexity and storage of the Gram matrix to linear, while providing a rigorous bound for the lowrank approximation. 
+		Our method achieves high accuracy results across various scenarios and surpasses competitors by a significant margin, particularly on shapes with substantial deformations. 
+		Additionally, we demonstrate the versatility of our method in challenging tasks such as shape transfer and medical registration.">
+    <link rel="icon" type="image/png" href="/author/icon.jpg">
+
+
+	<!-- Fonts and stuff -->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800'
+		rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="../css/project.css" media="screen" />
+	<link rel="stylesheet" type="text/css" media="screen" href="../css/iconize.css" />
+	<script src="../js/google-code-prettify/prettify.js"></script>
+</head>
+
+<body>
+	<div id="content">
+		<div id="content-inner">
+			<div class="section logos" style="text-align:center">
+				<a href="https://www.cair-cas.org.hk/" target="_blank"><IMG src="../logos/cair_cas.png" height="66" border="0"></a></td>
+				<a href="https://www.en.sdu.edu.cn/" target="_blank"><IMG src="../logos/Logo_SDU.png" height="66" border="0"></a></td>
+				<a href="https://www.pku.edu.cn/" target="_blank"><IMG src="../logos/pku.jpg" height="66"	border="0"></a></td>
+				<a href="http://www.ia.cas.cn/" target="_blank"><IMG src="../logos/casia.jpg" height="66"	border="0"></a></td>
+				<a href="https://www.ucas.ac.cn/" target="_blank"><IMG src="../logos/cas.png" height="66"	border="0"></a></td>
+
+			</div>
+
+			<div class="section head">
+
+				<h1>Correspondence-Free Non-Rigid Point Set Registration Using Unsupervised Clustering Analysis</h1>
+
+				<div class="authors">
+					<a href="https://zikai1.github.io/" target="_blank">Mingyang Zhao</a><sup> 1</sup>&#160;&#160;
+					<a href="https://xiaowuga.github.io/" target="_blank">Jingen Jiang</a><sup> 2</sup>&#160;&#160;
+					Lei Ma</a><sup> 3</sup>&#160;&#160;
+					<a href="http://irc.cs.sdu.edu.cn/~shiqing/index.html" target="_blank">Shiqing Xin</a><sup> 2</sup>&#160;&#160;
+					Gaofeng Meng</a><sup> 1,4,5</sup>&#160;&#160;
+					<a href="https://sites.google.com/site/yandongming/">Dong-Ming Yan</a><sup> 4,5</sup>&#160;&#160;
+				</div>
+
+				<div class="affiliations">
+					<sup>1</sup><a href="https://www.cair-cas.org.hk/" target="_blank">Hong Kong Institute of Science & Innovation, Chinese Academy of Sciences</a>&#160;&#160;<br>
+					<sup>2</sup><a href="https://www.en.sdu.edu.cn/" target="_blank">Shandong University</a>&#160;&#160;
+					<sup>3</sup><a href="https://www.pku.edu.cn/" target="_blank">Peking University</a>&#160;&#160;<br>
+					<sup>4</sup><a href="http://www.ia.cas.cn/" target="_blank">Institute of Automation, Chinese Academy of Sciences</a>&#160;&#160;<br>
+					<sup>5</sup><a href="https://www.ucas.ac.cn/" target="_blank">University of Chinese Academy of Sciences</a>&#160;&#160;
+				</div>
+				<div class="venue"> CVPR 2024 Highlight. </div>
+			</div>
+						<div class="section downloads">
+					<center>
+						<ul style="padding-left: 0">
+							<li class="grid">
+								<div class="griditem">
+									<a href="../pdf/Clu_Reg.pdf"><img src="../images/pdf.png"></a><br/>
+									<a href="../pdf/Clu_Reg.pdf">Paper</a>
+								</div>
+							</li>
+							<li class="grid">
+								<div class="griditem">
+									<a href="../pdf/Clu_Reg_supp.pdf"><img src="../images/pdf.png"></a><br/>
+									<a href="../pdf/Clu_Reg_supp.pdf">Supplementary</a>
+								</div>
+							</li>
+							<li class="grid">
+								<div class="griditem">
+									<a href="https://github.com/zikai1/CVPR24_PointSetReg"><img src="../images/data_ico.png"></a><br/>
+									<a href="https://github.com/zikai1/CVPR24_PointSetReg">Code</a>
+
+								</div>
+							</li>
+						</ul>
+					</center>
+				</div>
+
+
+			<div class="section abstract">
+				<h2>Abstract</h2><br>
+				<div class="row" style="margin-bottom:0px">
+					<div class="col" style="text-align:center">
+						<img class="thumbnail" src="figs/teaser.jpg" style="width:95%; margin-bottom:0px">
+					</div>
+
+				</div>
+				<p style="text-align:justify;">
+					This paper presents a novel non-rigid point set registration method that is inspired by unsupervised clustering analysis. 
+					Unlike previous approaches that treat the source and target point sets as separate entities, we develop a holistic framework where they are formulated as clustering centroids and clustering members, separately. 
+					We then adopt Tikhonov regularization with an ℓ1-induced Laplacian kernel instead of the commonly used Gaussian kernel to ensure smooth and more robust displacement fields. Our formulation delivers closed-form solutions, theoretical guarantees, independence from dimensions, and the ability to handle large deformations. 
+					Subsequently, we introduce a clustering-improved Nystr ̈ om method to effectively reduce the computational complexity and storage of the Gram matrix to linear, while providing a rigorous bound for the lowrank approximation. 
+					Our method achieves high accuracy results across various scenarios and surpasses competitors by a significant margin, particularly on shapes with substantial deformations. 
+					Additionally, we demonstrate the versatility of our method in challenging tasks such as shape transfer and medical registration.</p>
+			</div>
+
+
+			<br>
+
+			<div class="section abstract">
+				<h2>Motivation</h2><br>
+				<p style="text-align:justify;">
+					Non-rigid point set registration is to optimize a non-linear displacement field that accurately aligns one geometric shape with another. 
+					However, given two point sets, one acting as the source and the other as the target, non-rigid registration presents a highly ill-posed and much more complex challenge compared to the rigid counterpart.
+					This increased complexity is primarily attributed to the additional freedom of deformations allowed in non-rigid registration, especially when dealing with shapes that exhibit large deformations. 
+					Previous approaches typically perform shape matching first and then estimate the alignment transformation based on the established correspondences via off-the-shelf registration techniques. 
+					Nevertheless, shape matching self has many outliers that may deteriorate registration. 
+					To address this problem, we explore a direct registration method for handling large deformations, without relying on shape matching.</p>
+			</div>
+			<div class="section abstract">
+				<h2>Problem Formulation</h2><br>
+				<div class="row" style="margin-bottom:0px">
+					<div class="col" style="text-align:center">
+						<img class="thumbnail" src="figs/formulation.png" style="width:60%; margin-bottom:0px">
+					</div>
+
+				</div>
+			</div>
+
+
+			<br>
+
+			<div class="section abstract">
+				<h2>Results</h2><br>
+
+				<!-- <center>
+					<div class="row" style="margin-bottom:5px">
+					<div class="col" style="text-align:center">
+						<img class="thumbnail" src="figs/2d_comp.png" style="width:50%; margin-bottom:20px">
+					</div>
+					<p style="text-align:justify; text-align-last: center;">
+						Qualitative comparisons on the 2D hand pose dataset.
+					</p>
+					</div>
+
+				</center> -->
+
+				<center>
+					<div class="row" style="margin-bottom:5px">
+					<div class="col" style="text-align:center">
+						<img class="thumbnail" src="figs/3d_comp.png" style="width:95%; margin-bottom:20px">
+					</div>
+					<p style="text-align:justify; text-align-last: center;">
+						Qualitative comparisons on the FAUST dataset. The top and the bottom rows represent the test registrations of intra and inter-subject, respectively.
+					</p>
+					<div class="col" style="text-align:center">
+						<img class="thumbnail" src="figs/3d_comp_table.png" style="width:95%; margin-bottom:20px">
+					</div>
+					<p style="text-align:justify; text-align-last: center;">
+						Quantitative comparisons on the real-world FAUST human scan dataset.
+					</p>
+					</div>
+
+				</center>
+
+				<center>
+					<div class="row" style="margin-bottom:5px">
+					<div class="col" style="text-align:center">
+						<img class="thumbnail" src="figs/3d_comp2.png" style="width:95%; margin-bottom:20px">
+					</div>
+					<p style="text-align:justify; text-align-last: center;">
+						Qualitative comparisons on the TOSCA dataset, where much larger shape deformations exist.
+					</p>
+					</div>
+
+				</center>
+
+
+				<center>
+					<div class="row" style="margin-bottom:5px">
+					<div class="col" style="text-align:center">
+						<img class="thumbnail" src="figs/3d_comp2_table.png" style="width:50%; margin-bottom:20px">
+					</div>
+					<p style="text-align:justify; text-align-last: center;">
+						Quantitative comparisons on the TOSCA dataset.
+					</p>
+					</div>
+
+				</center>
+
+
+
+			</div>
+
+			<br>
+			
+			<div class="section abstract">
+				<h2>Applications</h2><br>
+
+				<center>
+					<div class="row" style="margin-bottom:5px">
+					<div class="col" style="text-align:center">
+						<img class="thumbnail" src="figs/app.png" style="width:95%; margin-bottom:20px">
+					</div>
+					<p style="text-align:justify; text-align-last: center;">
+						Left: Application of our method to medical data registration. Right: Application of the proposed method to shape transfer.
+					</p>
+					</div>
+
+				</center>
+
+
+			</div>
+
+				
+			</div>
+			
+			
+			
+
+			
+			<div class="section list">
+				<h2>Citation</h2>
+				<div class="section bibtex">
+					<pre>
+@inproceedings{zhao2024clustereg,
+title={Correspondence-Free Nonrigid Point Set Registration Using Unsupervised Clustering Analysis},
+author={Mingyang Zhao, Jingen Jiang, Lei Ma, Shiqing Xin, Gaofeng Meng, Dong-Ming Yan},
+booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+year={2024}
+}</pre>
+				</div>
+			</div>
+			
+			
+			
+			<div class="section">
+				<hr class="smooth">
+				This page was last updated by <a href="https://xiaowuga.github.io/" itemprop="url" rel="noopener">Jingen Jiang</a> on 
+				<script type="text/javascript">
+					var m = document.lastModified;
+					var p = m.length - 9;
+					document.writeln("<left>");
+					document.write(m.substring(p, 0) + ".");
+					document.writeln("</left>");
+				</script>
+			
+			</div>
+		</div>
+	</div>
+</body>
+</html>
